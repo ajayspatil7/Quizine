@@ -5,42 +5,14 @@ import tkinter.simpledialog
 import hashlib
 import os
 
-#  Password is 0
-
-class TextEditor(tk.Tk):
-    def __init__(self):
-        super().__init__()
-
-        self.text = tk.Text(self)
-        self.text.pack(side="top", fill="both", expand=True)
-
-        self.save_button = tk.Button(self, text="Save", command=self.save)
-        self.save_button.pack(side="bottom")
-
-    def save(self):
-
-        text = self.text.get("1.0", "end-1c")  # Get the text from the text widget
-        desktop = os.path.join(os.path.expanduser("~"), "Desktop")  # Get the desktop path
-        file_path = os.path.join(desktop, "text.txt")  # Create the file path
-        # Write the text to the file
-        with open(file_path, "w") as f:
-            f.write(text)
-           
 
 class ExamApp(tk.Tk):
 
     def save(self):
-        # Get the text from the text widget
-        text = self.text.get("1.0", "end-1c")
-
-        # Get the desktop path
-        desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-
-        # Create the file path
-        file_path = os.path.join(desktop, "text.txt")
-
-        # Write the text to the file
-        with open(file_path, "w") as f:
+        text = self.text.get("1.0", "end-1c")  # Get the text from the text widget
+        # desktop = os.path.join(os.path.expanduser("~"), "Desktop")  # Get the desktop path
+        file_path = "/Users/ajay/PycharmProjects/Quizine/submissions/file.c"  # Create the file path
+        with open(file_path, "w") as f:  # Write the text to the file
             f.write(text)
 
     def __init__(self):
@@ -58,7 +30,6 @@ class ExamApp(tk.Tk):
         self.save_button.place(x=1300, y=35)
         self.config(bg="blue")
 
-
         # Store the password in a secure way, such as a hash
         import hashlib
         self.password_hash = hashlib.sha256("0".encode()).hexdigest()
@@ -75,7 +46,6 @@ class ExamApp(tk.Tk):
         screen_height = screen_width = self.winfo_screenheight()
         x = screen_width // 2
         y = screen_height // 2
-
         input_password = tkinter.simpledialog.askstring("End Exam", "Enter password to end exam:", show="*")
 
         # Check if the password is correct
@@ -85,5 +55,3 @@ class ExamApp(tk.Tk):
         else:
             tk.messagebox.showerror("Error", "Incorrect password")
 
-app = ExamApp()
-app.mainloop()

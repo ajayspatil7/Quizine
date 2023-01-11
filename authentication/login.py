@@ -1,41 +1,33 @@
 import tkinter as tk
 
 
-class LoginWindow(tk.Toplevel):
-    def __init__(self, master):
-        super().__init__(master)
+class LoginInterface():
+    # Create the main window
+    root = tk.Tk()
+    root.title("Login")
+    root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
+    root.wm_resizable(False, False)
 
-        self.title("Login")
-        self.geometry("200x100")
+    # Create the username label and textbox
+    user_label = tk.Label(root, text="Username:")
+    user_label.grid(row=0, column=0, padx=10, pady=10)
+    user_entry = tk.Entry(root)
+    user_entry.grid(row=0, column=1, padx=10, pady=10)
 
-        self.user_id_label = tk.Label(self, text="User ID:")
-        self.user_id_label.pack(side="left")
+    # Create the password label and textbox
+    pass_label = tk.Label(root, text="Password:")
+    pass_label.grid(row=1, column=0, padx=5, pady=5)
+    pass_entry = tk.Entry(root, show="*")
+    pass_entry.grid(row=1, column=1, padx=5, pady=5)
 
-        self.user_id_entry = tk.Entry(self)
-        self.user_id_entry.pack(side="left")
+    # Create the login button
+    # Modify the login button to call the login function
 
-        self.password_label = tk.Label(self, text="Password:")
-        self.password_label.pack(side="left")
+    login_button = tk.Button(root, text="Login", bg="white", fg="black", command=login)
+    login_button.grid(row=2, column=0, columnspan=2, padx=5, pady=5)
 
-        self.password_entry = tk.Entry(self, show="*")
-        self.password_entry.pack(side="left")
-
-        self.login_button = tk.Button(self, text="Login", command=self.login)
-        self.login_button.pack(side="left")
-
-    def login(self):
-        user_id = self.user_id_entry.get()
-        password = self.password_entry.get()
-
-        # Check if the user's credentials are correct
-        if user_id == "abc" and password == "123":
-            # Close the login window
-            self.destroy()
-
-            # Open the exam interface
-            ExamWindow(self.master)
+    # Run the main loop
+    root.mainloop()
 
 
-class ExamWindow(tk.Toplevel):
-    def __init__(self, master):
-        super().__init__(master)
+
